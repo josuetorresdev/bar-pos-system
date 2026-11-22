@@ -30,7 +30,13 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+
+        String frontendUrl = System.getenv("FRONTEND_URL");
+        List<String> allowedOrigins = (frontendUrl != null && !frontendUrl.isBlank())
+            ? List.of("http://localhost:3000", frontendUrl)
+            : List.of("http://localhost:3000");
+
+        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
