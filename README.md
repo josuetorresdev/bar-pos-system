@@ -5,6 +5,10 @@ Sistema de Punto de Venta (POS) y gestión de mesas diseñado para bares y resta
  **Demo en vivo:** https://bar-pos-system-ten.vercel.app/  
  **API REST Base:** https://bar-pos-backend-f9yc.onrender.com/api
 
+> [!NOTE]
+> Antes de iniciar la demo en vivo ingresar a API REST Base
+
+
 ---
 
 ##  Vista Previa
@@ -16,7 +20,7 @@ Sistema de Punto de Venta (POS) y gestión de mesas diseñado para bares y resta
 
 ##  Stack Tecnológico
 
-* **Backend:** Java 17, Spring Boot 3, Spring Data JPA, Spring Security, Bean Validation, Maven.
+* **Backend:** Java 21, Spring Boot 3, Spring Data JPA, Spring Security, Bean Validation, Maven.
 * **Base de Datos:** PostgreSQL 16 (Docker en desarrollo / Neon en producción).
 * **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS.
 * **Infraestructura & Herramientas:** Docker, Docker Compose, Git/GitHub.
@@ -60,7 +64,7 @@ bar-pos-system/
 ## Ejecución Local
 
 ### Requisitos previos
-- Java 17 o superior
+- Java 21 
 - Node.js 18 o superior
 - Docker y Docker Compose
 
@@ -68,7 +72,7 @@ bar-pos-system/
 
 1. **Clonar el repositorio:**
    ```
-   git clone [https://github.com/TU_USUARIO/bar-pos-system.git](https://github.com/TU_USUARIO/bar-pos-system.git)
+   git clone https://github.com/josuetorresdev/bar-pos-system.git
    cd bar-pos-system
    ```
 
