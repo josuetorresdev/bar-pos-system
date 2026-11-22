@@ -1,20 +1,20 @@
-# 🍻 Bar POS System — Full Stack Point of Sale
+#  Bar POS System — Full Stack Point of Sale
 
 Sistema de Punto de Venta (POS) y gestión de mesas diseñado para bares y restaurantes. Permite administrar la apertura de cuentas por mesa o barra, agregar rondas de consumo con control transaccional de inventario en tiempo real y realizar el cierre y cobro de caja.
 
-🔗 **Demo en vivo:** https://bar-pos-system-ten.vercel.app/  
-⚙️ **API REST Base:** https://bar-pos-backend-f9yc.onrender.com/api
+ **Demo en vivo:** https://bar-pos-system-ten.vercel.app/  
+ **API REST Base:** https://bar-pos-backend-f9yc.onrender.com/api
 
 ---
 
-## 📸 Vista Previa
+##  Vista Previa
 
 ![alt text](image.png)
 
 ![alt text](image-1.png)
 ---
 
-## 🛠️ Stack Tecnológico
+##  Stack Tecnológico
 
 * **Backend:** Java 17, Spring Boot 3, Spring Data JPA, Spring Security, Bean Validation, Maven.
 * **Base de Datos:** PostgreSQL 16 (Docker en desarrollo / Neon en producción).
@@ -23,7 +23,7 @@ Sistema de Punto de Venta (POS) y gestión de mesas diseñado para bares y resta
 
 ---
 
-## 🏗️ Arquitectura y Decisiones Técnicas
+##  Arquitectura y Decisiones Técnicas
 
 * **Integridad Transaccional (`@Transactional`):** La apertura de mesas, el descuento de stock al agregar productos y el cierre de órdenes se ejecutan de forma atómica para evitar inconsistencias entre el estado de la mesa y el inventario.
 * **Precisión Financiera:** Uso estricto de `BigDecimal` en el backend y almacenamiento histórico del precio unitario (`unit_price`) en cada ítem de la orden para proteger cuentas abiertas ante modificaciones futuras en el catálogo.
@@ -32,15 +32,15 @@ Sistema de Punto de Venta (POS) y gestión de mesas diseñado para bares y resta
 
 ---
 
-## 📂 Estructura del Proyecto
+##  Estructura del Proyecto
 
-```text
+ ```
 bar-pos-system/
 ├── backend/               # API REST en Java + Spring Boot + Dockerfile
 ├── frontend/              # Interfaz operativa en Next.js + TypeScript
 ├── docker-compose.yml     # Contenedor PostgreSQL para desarrollo local
 └── README.md
-
+ ```
 ---
 
 ## Endpoints Principales de la API
@@ -67,32 +67,33 @@ bar-pos-system/
 ### Pasos
 
 1. **Clonar el repositorio:**
-   ```bash
+   ```
    git clone [https://github.com/TU_USUARIO/bar-pos-system.git](https://github.com/TU_USUARIO/bar-pos-system.git)
    cd bar-pos-system
+   ```
 
 2. **Levantar la base de datos PostgreSQL con Docker:**
-   ```bash
+   ```
    docker compose up -d
+   ```
 
 3. **Iniciar el Backend (Spring Boot):**
-   ```bash
+   ```
    cd backend
    ./mvnw spring-boot:run
+   ```
 
 4. **Iniciar el Frontend (Next.js):**
-   ```bash
+   ```
     cd frontend
     npm install
     npm run dev
+   ```
 
-Abrir http://localhost:3000 en el navegador.
+4. **Abrir http://localhost:3000 en el navegador**
 
 ### Roadmap (Próximas Mejoras)
-[ ] Autenticación con JWT y control de acceso por roles (ADMIN, WAITER, CASHIER).
-
-[ ] Panel administrativo para CRUD de productos, categorías y reabastecimiento de inventario.
-
-[ ] Soporte para notas personalizadas por ítem en comanda y división de cuentas.
-
-[ ] Reporte de corte de caja diario y métricas de productos más vendidos.
+- [ ] Autenticación con JWT y control de acceso por roles (ADMIN, WAITER, CASHIER).
+- [ ] Panel administrativo para CRUD de productos, categorías y reabastecimiento de inventario.
+- [ ] Soporte para notas personalizadas por ítem en comanda y división de cuentas.
+- [ ] Reporte de corte de caja diario y métricas de productos más vendidos.
