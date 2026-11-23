@@ -1,63 +1,63 @@
 #  Bar POS System — Full Stack Point of Sale
 
-Sistema de Punto de Venta (POS) y gestión de mesas diseñado para bares y restaurantes. Permite administrar la apertura de cuentas por mesa o barra, agregar rondas de consumo con control transaccional de inventario en tiempo real y realizar el cierre y cobro de caja.
+Point of Sale (POS) and table management system designed for bars and restaurants. It allows managing open tabs by table or bar counter, adding consumption rounds with real-time transactional inventory control, and handling cash register closing and payment.
 
- **Demo en vivo:** https://bar-pos-system-ten.vercel.app/  
+ **Live Demo:** https://bar-pos-system-ten.vercel.app/  
  **API REST Base:** https://bar-pos-backend-f9yc.onrender.com/api
 
 > [!NOTE]
-> Antes de iniciar la demo en vivo ingresar a API REST Base
+> Before starting the live demo, please visit the REST API Base URL to wake up the server.
 
 
 ---
 
-##  Vista Previa
+##  Preview
 
 ![alt text](image.png)
 
 ![alt text](image-1.png)
 ---
 
-##  Stack Tecnológico
+##  Tech Stack
 
 * **Backend:** Java 21, Spring Boot 3, Spring Data JPA, Spring Security, Bean Validation, Maven.
-* **Base de Datos:** PostgreSQL 16 (Docker en desarrollo / Neon en producción).
+* **Database:** PostgreSQL 16 (Docker en desarrollo / Supabase in production).
 * **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS.
-* **Infraestructura & Herramientas:** Docker, Docker Compose, Git/GitHub.
+* **Infrastructure & Tools:** Docker, Docker Compose, Git/GitHub.
 
 ---
 
-##  Arquitectura y Decisiones Técnicas
+##  Architecture & Technical Decisions
 
-* **Integridad Transaccional (`@Transactional`):** La apertura de mesas, el descuento de stock al agregar productos y el cierre de órdenes se ejecutan de forma atómica para evitar inconsistencias entre el estado de la mesa y el inventario.
-* **Precisión Financiera:** Uso estricto de `BigDecimal` en el backend y almacenamiento histórico del precio unitario (`unit_price`) en cada ítem de la orden para proteger cuentas abiertas ante modificaciones futuras en el catálogo.
-* **Arquitectura en Capas y DTOs:** Separación clara entre controladores REST (`controller`), lógica de negocio (`service`), acceso a datos (`repository`) y Java `records` (`dto`) para desacoplar la API de las entidades JPA.
-* **Datos Iniciales Automatizados (`DataSeeder`):** Carga controlada de roles, catálogo base y distribución de mesas al iniciar en entornos limpios para facilitar pruebas inmediatas.
+* **Transactional Integrity (`@Transactional`):** Opening tables, deducting stock when adding products, and closing orders are executed atomically to prevent inconsistencies between table status and inventory.
+* **Financial Precision:** Strict use of `BigDecimal` in the backend and historical storage of the unit price (`unit_price`) in each order item to protect open tabs from future catalog price changes.
+* **Layered Architecture & DTOs:** Clear separation between REST controllers (`controller`), business logic (`service`), data access (`repository`), and Java `records` (`dto`) to decouple the API from JPA entities.
+* **Automated Initial Data (`DataSeeder`):** Controlled loading of roles, base catalog, and table layout upon startup in clean environments to facilitate immediate testing.
 
 ---
 
-##  Estructura del Proyecto
+##  Project Structure
 
  ```
 bar-pos-system/
-├── backend/               # API REST en Java + Spring Boot + Dockerfile
-├── frontend/              # Interfaz operativa en Next.js + TypeScript
-├── docker-compose.yml     # Contenedor PostgreSQL para desarrollo local
+├── backend/               # Java + Spring Boot REST API + Dockerfile
+├── frontend/              # Next.js + TypeScript operational interface
+├── docker-compose.yml     # PostgreSQL container for local development
 └── README.md
  ```
 ---
 
-## Endpoints Principales de la API
+## Main API Endpoints
 
-| Método | Endpoint | Descripción |
+| Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/tables` | Lista todas las mesas y su estado (`AVAILABLE` / `OCCUPIED`). |
-| `GET` | `/api/catalog/categories` | Obtiene las categorías activas del menú. |
-| `GET` | `/api/catalog/products` | Obtiene los productos activos (filtrable por `categoryId`). |
-| `POST` | `/api/orders/open` | Abre una nueva cuenta en una mesa disponible. |
-| `GET` | `/api/orders/table/{tableId}` | Consulta la orden abierta actual de una mesa. |
-| `POST` | `/api/orders/{orderId}/items` | Agrega productos a la orden y descuenta el inventario. |
-| `POST` | `/api/orders/{orderId}/pay` | Marca la orden como pagada (`PAID`) y libera la mesa. |
+| `GET` | `/api/tables` | Lists all tables and their status (`AVAILABLE` / `OCCUPIED`). |
+| `GET` | `/api/catalog/categories` | Retrieves active menu categories. |
+| `GET` | `/api/catalog/products` | Retrieves active products (filterable by `categoryId`). |
+| `POST` | `/api/orders/open` | Opens a new tab on an available table. |
+| `GET` | `/api/orders/table/{tableId}` | Retrieves the current open order for a table. |
+| `POST` | `/api/orders/{orderId}/items` | Adds products to the order and deducts inventory. |
+| `POST` | `/api/orders/{orderId}/pay` | Marks the order as paid (`PAID`) and frees up the table. |
 
 ---
 
@@ -66,38 +66,38 @@ bar-pos-system/
 ### Requisitos previos
 - Java 21 
 - Node.js 18 o superior
-- Docker y Docker Compose
+- Docker and Docker Compose
 
-### Pasos
+### Steps
 
-1. **Clonar el repositorio:**
+1. **Clone the repository:**
    ```
    git clone https://github.com/josuetorresdev/bar-pos-system.git
    cd bar-pos-system
    ```
 
-2. **Levantar la base de datos PostgreSQL con Docker:**
+2. **Start the PostgreSQL database with Docker:**
    ```
    docker compose up -d
    ```
 
-3. **Iniciar el Backend (Spring Boot):**
+3. **Start the Backend (Spring Boot):**
    ```
    cd backend
    ./mvnw spring-boot:run
    ```
 
-4. **Iniciar el Frontend (Next.js):**
+4. **Start the Frontend (Next.js):**
    ```
     cd frontend
     npm install
     npm run dev
    ```
 
-4. **Abrir http://localhost:3000 en el navegador**
+4. **Open http://localhost:3000 in your browser**
 
-### Roadmap (Próximas Mejoras)
-- [ ] Autenticación con JWT y control de acceso por roles (ADMIN, WAITER, CASHIER).
-- [ ] Panel administrativo para CRUD de productos, categorías y reabastecimiento de inventario.
-- [ ] Soporte para notas personalizadas por ítem en comanda y división de cuentas.
-- [ ] Reporte de corte de caja diario y métricas de productos más vendidos.
+### Roadmap (Upcoming Improvements)
+- [ ] JWT authentication and role-based access control (ADMIN, WAITER, CASHIER).
+- [ ] Admin dashboard for product and category CRUD operations and inventory restocking.
+- [ ] Support for custom notes per item on kitchen/bar tickets and bill splitting.
+- [ ] Daily cash register closing report and best-selling product metrics.
